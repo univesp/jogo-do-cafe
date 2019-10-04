@@ -17,4 +17,9 @@ public class Recebimento : MonoBehaviour
         estoque.AdicionaEstoque(caixas);
         caixas = 0;
     }
+
+    public void Reinicia()
+    {
+        caixas = 0;
+    }
 }

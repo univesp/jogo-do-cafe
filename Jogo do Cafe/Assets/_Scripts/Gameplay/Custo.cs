@@ -19,4 +19,10 @@ public class Custo : MonoBehaviour
         UIText.text = gastos.ToString();
         aumentaAnimacao.SetActive(true);
     }
+
+    public void Reinicia()
+    {
+        gastos = 0;
+        UIText.text = gastos.ToString();
+    }
 }

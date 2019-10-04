@@ -46,4 +46,14 @@ public class PedidosRecebidos : MonoBehaviour
         pedidos = 0;
         UIText.text = pedidos.ToString();
     }
+
+    public void Reinicia()
+    {
+        pedidos = 5;
+        UIText.text = pedidos.ToString();
+        pedidosAI = 5;
+        semanaContador = 3;
+        ultimosTresPedidosAI = new int[3];
+        estoque.Reinicia();
+    }
 }

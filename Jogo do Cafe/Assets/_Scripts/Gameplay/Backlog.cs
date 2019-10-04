@@ -13,8 +13,6 @@ public class Backlog : MonoBehaviour
     [SerializeField] private GameObject aumentaAnimacao;
     [SerializeField] private GameObject diminuiAnimacao;
 
-    public int testeBacklog = 0;
-
     private void Start()
     {
         pendencias = 0;
@@ -28,7 +26,6 @@ public class Backlog : MonoBehaviour
 
     public void AdicionaPendencias(int _quantidade)
     {
-        testeBacklog += _quantidade;
         pendencias += _quantidade;
         UIText.text = pendencias.ToString();
         aumentaAnimacao.SetActive(true);

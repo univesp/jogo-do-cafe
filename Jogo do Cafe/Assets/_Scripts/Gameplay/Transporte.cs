@@ -104,4 +104,13 @@ public class Transporte : MonoBehaviour
     {
         return espera;
     }
+
+    public void VoltaParaPai()
+    {
+        espera = true;
+        index = 0;
+        transform.SetParent(pai.transform);
+        EventManager.OnCall -= PodeMover;
+        gameObject.SetActive(false);
+    }
 }

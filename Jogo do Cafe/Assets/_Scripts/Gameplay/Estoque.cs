@@ -80,4 +80,12 @@ public class Estoque : MonoBehaviour
 
         caixasAI = caixas;
     }
+
+    public void Reinicia()
+    {
+        caixas = 12;
+        UIText.text = caixas.ToString();
+        caixasAI = 0;
+        expedicao.Reinicia();
+    }
 }

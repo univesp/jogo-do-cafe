@@ -20,4 +20,10 @@ public class Estrada : MonoBehaviour
         estradaB = estradaA;
         estradaA = _quantidade;
     }
+
+    public void Reinicia()
+    {
+        estradaA = 4;
+        estradaB = 4;
+    }
 }

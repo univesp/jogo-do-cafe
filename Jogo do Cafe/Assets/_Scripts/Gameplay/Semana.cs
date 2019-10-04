@@ -18,4 +18,9 @@ public class Semana : MonoBehaviour
     {
         semanaAtual.text = proximaSemana.text;        
     }
+
+    public void Reinicia()
+    {
+        semanaAtual.text = "SEMANA 01";
+    }
 }

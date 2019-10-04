@@ -78,4 +78,10 @@ public class PedidosColocados : MonoBehaviour
         pedidosTexto.text = "0";
     }
 
+    public void Reinicia()
+    {
+        pedidos = 0;
+        pedidosTexto.text = pedidos.ToString();
+        botaoOK.interactable = false;
+    }
 }

@@ -35,4 +35,14 @@ public class Expedicao : MonoBehaviour
     {
         return caixas.ToString();
     }
+
+    public void Reinicia()
+    {
+        if (transporte != null)
+        {
+            transporte.VoltaParaPai();
+            transporte = null;
+            caixas = 0;
+        }
+    }
 }

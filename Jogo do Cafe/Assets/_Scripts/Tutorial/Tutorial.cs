@@ -43,6 +43,9 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private InteligenciaArtificial IA;
 
+    public bool voltando;
+
+    private bool jaAndou;
     private void Start()
     {
         tutorialJanela.gameObject.SetActive(true);
@@ -71,6 +74,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(203.0f, 80.0f);
 
                     tutorialJanela.localPosition = new Vector2(111.0f, -183.0f);
+                    voltando = false;
                     break;
 
                 case 4:
@@ -78,6 +82,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(352.1f, -23.0f);
 
                     tutorialJanela.localPosition = new Vector2(-138.0f, 71.0f);
+                    voltando = false;
                     break;
 
                 case 5:
@@ -85,6 +90,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(55.6f, -183.0f);
 
                     tutorialJanela.localPosition = new Vector2(0.0f, 47.7f);
+                    voltando = false;
                     break;
 
                 case 6:
@@ -92,6 +98,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(-513.5f, 34.0f);
 
                     tutorialJanela.localPosition = new Vector2(89.0f, 34.0f);
+                    voltando = false;
                     break;
 
                 case 7:
@@ -99,6 +106,21 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(-107.3f, 215.0f);
 
                     tutorialJanela.localPosition = new Vector2(37.7f, -60.0f);
+                    voltando = false;
+                    break;
+
+                case 10:
+                    //Reinicia as operações do índice 11
+                    fabrica.pedidosRecebidos.Reinicia();
+                    distribuidor.pedidosRecebidos.Reinicia();
+                    atacadista.pedidosRecebidos.Reinicia();
+                    varejista.pedidosRecebidos.Reinicia();
+
+                    evidencia1.gameObject.SetActive(false);
+                    evidencia2.gameObject.SetActive(false);
+
+                    tutorialJanela.transform.localPosition = Vector3.zero;
+                    voltando = false;
                     break;
 
                 case 11:
@@ -112,12 +134,14 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia2.localPosition = new Vector2(-301.3f, 14.6f);
 
                     tutorialJanela.localPosition = new Vector2(222.0f, 0.0f);
-
-                    fabrica.pedidosRecebidos.RetiraPedidos();
-                    distribuidor.pedidosRecebidos.RetiraPedidos();
-                    atacadista.pedidosRecebidos.RetiraPedidos();
-                    varejista.pedidosRecebidos.RetiraPedidos();
-
+                    if (!voltando)
+                    {
+                        fabrica.pedidosRecebidos.RetiraPedidos();
+                        distribuidor.pedidosRecebidos.RetiraPedidos();
+                        atacadista.pedidosRecebidos.RetiraPedidos();
+                        varejista.pedidosRecebidos.RetiraPedidos();
+                    }
+                    voltando = false;
                     break;
 
                 case 12:
@@ -126,30 +150,67 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     evidencia1.localPosition = new Vector2(-414.0f, -255.0f);
 
                     tutorialJanela.localPosition = new Vector2(134.0f, -147.0f);
+                    voltando = false;
                     break;
 
                 case 13:
+                    voltando = false;
                     break;
 
                 case 14:
+                    //Reinicia as operações do indice 15
+                    if (voltando)
+                    {
+                        fabrica.custo.Reinicia();
+                        distribuidor.custo.Reinicia();
+                        atacadista.custo.Reinicia();
+                        varejista.custo.Reinicia();
+                    }
+                    evidencia2.gameObject.SetActive(false);
+
+                    evidencia1.localPosition = new Vector2(-414.0f, -255.0f);
+
+                    tutorialJanela.localPosition = new Vector2(134.0f, -147.0f);
+                    voltando = false;
                     break;
 
                 case 15:
                     evidencia1.localPosition = new Vector2(-414.0f, -319.0f);
 
-                    fabrica.estoque.ContaCusto();
-                    distribuidor.estoque.ContaCusto();
-                    atacadista.estoque.ContaCusto();
-                    varejista.estoque.ContaCusto();
+                    if (!voltando)
+                    {
+                        fabrica.estoque.ContaCusto();
+                        distribuidor.estoque.ContaCusto();
+                        atacadista.estoque.ContaCusto();
+                        varejista.estoque.ContaCusto();
+                    }
+                    voltando = false;
+                    break;
 
-                    fabrica.backlog.CobraPendencias();
-                    distribuidor.backlog.CobraPendencias();
-                    atacadista.backlog.CobraPendencias();
-                    varejista.backlog.CobraPendencias();
+                case 18:
+                    //Reincia as operações do índice 19
+                    if (voltando)
+                    {
+                        fabrica.pedidosColocados.Reinicia();
+                        distribuidor.pedidosColocados.Reinicia();
+                        atacadista.pedidosColocados.Reinicia();
+                        varejista.pedidosColocados.Reinicia();
+                        distribuidor.pedidosColocados.botaoOK.interactable = false;
+                        fabrica.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                        atacadista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                        varejista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                    }
+                    tutoriaAreaClique.raycastTarget = true;
 
+                    evidencia1.gameObject.SetActive(false);
+                    evidencia2.gameObject.SetActive(false);
+
+                    tutorialJanela.transform.localPosition = Vector3.zero;
+                    voltando = false;
                     break;
 
                 case 19:
+                    distribuidor.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
                     evidencia1.sizeDelta = new Vector2(391.7f, 111.4f);
                     evidencia1.localPosition = new Vector2(-486.7f, -190.3f);                    
                     
@@ -163,34 +224,87 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     fabrica.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
                     atacadista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
                     varejista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
-
+                    voltando = false;
                     break;
 
                 case 20:
+                    distribuidor.pedidosColocados.botaoOK.interactable = false;
                     distribuidor.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
                     tutoriaAreaClique.raycastTarget = true;
+                    voltando = false;
                     break;
 
                 case 21:
+                    //Reinicia as operações do índice 22
+                    if (voltando)
+                    {
+                        tutoriaAreaClique.raycastTarget = true;
+                        evidencia1.sizeDelta = new Vector2(391.7f, 111.4f);
+                        evidencia1.localPosition = new Vector2(-486.7f, -190.3f);
+                        podeContinuar = true;
+                        tutorialJanela.transform.localPosition = Vector3.zero;
+                        semanaCont.Reinicia();
+                        semana = 1;
+
+                        fabrica.pedidosRecebidos.Reinicia();
+                        distribuidor.pedidosRecebidos.Reinicia();
+                        atacadista.pedidosRecebidos.Reinicia();
+                        varejista.pedidosRecebidos.Reinicia();
+
+                        fabrica.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                        atacadista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                        varejista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+                        distribuidor.pedidosColocados.notificacaoAnimator.gameObject.SetActive(false);
+
+                        fabrica.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        atacadista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        varejista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        distribuidor.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                    }
+                    voltando = false;
+
                     break;
 
                 case 22:
+                    //Reinicia operações do índice 23                                        
+                    if (voltando)
+                    {
+                        fabrica.expedicao.Reinicia();
+                        distribuidor.expedicao.Reinicia();
+                        atacadista.expedicao.Reinicia();
+                        varejista.expedicao.Reinicia();
+
+                        fabrica.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        atacadista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        varejista.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+                        distribuidor.pedidosColocados.notificacaoAnimator.gameObject.SetActive(true);
+
+
+                    }
                     StartCoroutine(QuintaAcao());
                     break;
 
                 case 23:
                     evidencia1.gameObject.SetActive(false);
                     tutorialJanela.localPosition = new Vector2(302.0f, 195.4f);
-                    EventManager.CallAction();
-                    estradaFabrica.RecebeCarga(fornecedorDaFabrica);
-                    fabrica.expedicao.EnviaEstrada();
-                    distribuidor.expedicao.EnviaEstrada();
-                    atacadista.expedicao.EnviaEstrada();
-                    varejista.expedicao.EnviaEstrada();
-
+                    if (!jaAndou)
+                    {
+                        jaAndou = true;
+                        EventManager.CallAction();
+                        estradaFabrica.RecebeCarga(fornecedorDaFabrica);
+                        fabrica.expedicao.EnviaEstrada();
+                        distribuidor.expedicao.EnviaEstrada();
+                        atacadista.expedicao.EnviaEstrada();
+                        varejista.expedicao.EnviaEstrada();
+                    }
+                    voltando = false;
                     break;
 
                 case 24:
+                    //Reinicia as operações do índice 25
+                    evidencia1.gameObject.SetActive(false);
+                    tutorialJanela.localPosition = new Vector2(302.0f, 195.4f);
+                    voltando = false;
                     break;
 
                 case 25:
@@ -204,6 +318,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
                     atacadista.recebimento.EnviaParaEstoque();
                     varejista.recebimento.EnviaParaEstoque();
 
+                    voltando = false;
                     break;
 
                 case 27:
@@ -211,6 +326,7 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
 
                     evidencia1.sizeDelta = new Vector2(404.6f, 90.9f);
                     evidencia1.localPosition = new Vector2(-489.2f, -136.0f);
+                    voltando = false;
                     break;
                 
                 case 28:
@@ -222,29 +338,45 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
 
                     evidencia2.sizeDelta = new Vector2(132.4f, 218.8f);
                     evidencia2.localPosition = new Vector2(-447.6f, -284.0f);
+                    voltando = false;
                     break;
 
                 case 29:
                     evidencia1.gameObject.SetActive(false);
                     evidencia2.gameObject.SetActive(false);
+                    voltando = false;
                     break;
 
                 case 30:                    
                     podeContinuar = false;
                     transicao.ChamaTransicao(10.0f);
+                    voltando = false;
                     break;                                    
 
                 default:
                     evidencia1.gameObject.SetActive(false);
                     evidencia2.gameObject.SetActive(false);
 
-                    tutorialJanela.transform.localPosition = Vector3.zero;                    
+                    tutorialJanela.transform.localPosition = Vector3.zero;
+                    voltando = false;
                     break;
             }
             if (index != 30)
             {
                 tutorialTextmesh.text = tutorialTexto[index];
             }
+        }
+    }
+
+    public void VoltaTutorial()
+    {
+        if (index > 0)
+        {
+            index -= 2;
+            voltando = true;
+            StopAllCoroutines();
+            podeContinuar = true;
+            ProximoTutorial();
         }
     }
 
@@ -285,11 +417,15 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler
         podeContinuar = true;
         tutoriaAreaClique.raycastTarget = true;
 
-        fornecedorDaFabrica = fabrica.pedidosColocados.PegaPedidos();
-        fabrica.pedidosRecebidos.AdicionaPedidos(5);
-        distribuidor.pedidosRecebidos.AdicionaPedidos(5);
-        atacadista.pedidosRecebidos.AdicionaPedidos(5);
-        varejista.pedidosRecebidos.AdicionaPedidos(5);
-        varejista.pedidosRecebidos.AdicionaPedidos(Random.Range(3, 7));
+        if (!voltando)
+        {
+            fornecedorDaFabrica = fabrica.pedidosColocados.PegaPedidos();
+            fabrica.pedidosRecebidos.AdicionaPedidos(5);
+            distribuidor.pedidosRecebidos.AdicionaPedidos(5);
+            atacadista.pedidosRecebidos.AdicionaPedidos(5);
+            varejista.pedidosRecebidos.AdicionaPedidos(5);
+            varejista.pedidosRecebidos.AdicionaPedidos(Random.Range(3, 7));
+        }
+        voltando = false;
     }
 }
